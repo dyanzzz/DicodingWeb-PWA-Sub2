@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Football Data</title>
+    <meta name="description" content="My Football Data" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./assets/css/materialize.min.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#1565c0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="blue darken-4" role="navigation">
+      <div class="nav-wrapper container">
+        <a href="./index.html" class="brand-logo" id="logo-container">Football Data</a>
+        <a href="#" class="sidenav-trigger" data-target="nav-mobile">&#9776;</a>
+
+        <ul class="topnav right hide-on-med-and-down"></ul>
+        <ul class="sidenav" id="nav-mobile"></ul>
+      </div>
+    </nav>
+    <!-- End Navigation -->
+
+    <div class="container" id="body-content"></div>
+
+    <script>
+        // REQUEST API FIRST TIME
+        document.addEventListener("DOMContentLoaded", function() {
+          let page = window.location.hash.substr(1);
+        });
+    </script>
+    <script src="./assets/js/materialize.min.js"></script>
+    <script src="./assets/js/idb.js"></script>
+    <script src="./assets/js/db.js"></script>
+    <script src="./assets/js/nav.js"></script>
+    <script src="./assets/js/api.js"></script>
+    <script src="./assets/js/register-service-worker.js"></script>
+  </body>
+</html>

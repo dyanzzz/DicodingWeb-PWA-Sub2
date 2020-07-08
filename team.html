@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Football Data</title>
+    <meta name="description" content="My Football Data" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./assets/css/materialize.min.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#1565c0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="blue darken-4" role="navigation">
+      <div class="nav-wrapper container">
+        <a href="./index.html" class="brand-logo" id="logo-container">Football Data</a>
+        <a href="./index.html" class="sidenav-trigger" data-target="nav-mobile">
+          <i class="material-icons">arrow_back</i>
+        </a>
+        <ul class="topnav right hide-on-med-and-down"></ul>
+        <ul class="sidenav" id="nav-mobile"></ul>
+      </div>
+    </nav>
+    <!-- End Navigation -->
+
+    <div class="container" id="body-content">
+      <div class="row" id="teams">
+  
+        <!-- Cards containing teams will be inserted here. -->
+        
+      </div>
+    </div>
+
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large blue darken-4 tooltipped" data-position="left" data-tooltip="Bookmark" id="save">
+        <i class="large material-icons">bookmark_border</i>
+      </a>
+      <a class="btn-floating btn-large blue darken-4 tooltipped" data-position="left" data-tooltip="Remove Bookmark" id="remove">
+        <i class="large material-icons">bookmark</i>
+      </a>
+    </div>
+
+    <script type="text/javascript" src="https://unpkg.com/snarkdown@1.0.2/dist/snarkdown.umd.js"></script>
+    <script src="./assets/js/materialize.min.js"></script>
+    <script src="./assets/js/api.js"></script>
+    <script src="./assets/js/idb.js"></script>
+    <script src="./assets/js/db.js"></script>
+    <script src="./assets/js/register-service-worker.js"></script>
+
+    <script>
+      
+        document.addEventListener("DOMContentLoaded", function() {
+
+          let elems = document.querySelectorAll('.tooltipped');
+          let instances = M.Tooltip.init(elems, options);
+
+          let urlParams = new URLSearchParams(window.location.search);
+          let isFromSaved = urlParams.get("saved");
+
+          let save = document.getElementById("save");
+          let remove = document.getElementById("remove");
+
+          if (isFromSaved) {
+            save.style.display = 'none';
+            getSavedTeamById();
+          } else {
+            remove.style.display = 'none';
+            var item = getTeamById();
+          }
+
+          save.onclick = function() {
+            //console.log("The FAB save button is clicked.");
+            item.then(function(team) {
+              saveForLater(team);
+              save.setAttribute("class", "btn-floating btn-large blue darken-4 tooltipped disabled")
+
+            });
+          };
+
+          remove.onclick = function() {
+            //console.log("The FAB remove button is clicked.");
+            let idParam = urlParams.get("id");
+            idParam = parseInt(idParam, 10);
+            removeTeam(idParam);
+            
+          };
+        });
+
+    </script>
+  </body>
+</html>
